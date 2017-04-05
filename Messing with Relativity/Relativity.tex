@@ -1,0 +1,207 @@
+
+
+\documentclass[11pt]{article}
+
+%%% These are some packages that are useful
+\usepackage{amsfonts, lipsum}
+\usepackage{amsmath,amssymb, amscd,amsbsy, amsthm, enumerate}
+\usepackage{mdframed, titlesec, setspace,verbatim, multicol}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage[unicode]{hyperref}
+\usepackage{tikz, pgfplots, xcolor, fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+
+%%% Page formatting
+%\setlength{\headsep}{30pt}
+\setlength{\parindent}{20pt}
+\setlength{\textheight}{9in}
+
+%%% Header and Footer Info
+\pagestyle{fancy}
+\fancyhead[L]{{\large Free Time - \textbf{Scratch Paper}}}
+\fancyhead[C]{}
+\fancyhead[R]{Name: Antonius Torode}
+\fancyfoot[L]{MSU}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{Scrap}
+
+%%% These define our question environment and help number things correctly
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{question}[thm]{Question}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{DEF}[thm]{Definition}
+\newtheorem{rem}[thm]{Remark}
+
+\newenvironment{Deleted}
+{\let\oldqedsymbol=\qedsymbol
+	\renewcommand{\qedsymbol}{$ $}
+	\begin{proof}[\bfseries\upshape \color{red}Deleted]\color{red}}
+	{\end{proof}
+	\renewcommand{\qedsymbol}{\oldqedsymbol}}
+
+%Fancy Box
+\newcounter{fancybox}[section] \setcounter{fancybox}{0}
+\renewcommand{\thefancybox}{\arabic{chapter}.\arabic{fancybox}}
+\newenvironment{fancybox}[2][]{%
+	\refstepcounter{fancybox}%
+	\ifstrempty{#1}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=orange!20]
+				{\strut ~\thefancybox};}}
+	}%
+	{\mdfsetup{%
+			frametitle={%
+				\tikz[baseline=(current bounding box.east),outer sep=0pt]
+				\node[anchor=east,rectangle,fill=orange!20]
+				{\strut ~\thefancybox:~#1};}}%
+	}%
+	\mdfsetup{innertopmargin=10pt,linecolor=orange!20,%
+		linewidth=2pt,topline=true,%
+		frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+	}
+	\begin{mdframed}[]\relax%
+		\label{#2}}{\end{mdframed}}
+
+%%% This defines the solution environment for you to write your solutions
+\newenvironment{soln}
+{\let\oldqedsymbol=\qedsymbol
+	\renewcommand{\qedsymbol}{$ $}
+	\begin{proof}[\bfseries\upshape \color{blue}Solution]\color{blue}}
+	{\end{proof}
+	\renewcommand{\qedsymbol}{\oldqedsymbol}}
+
+%%% This defines the note environment for you to write your notes
+\newenvironment{note}
+{\let\oldqedsymbol=\qedsymbol
+	\renewcommand{\qedsymbol}{$ $}
+	\begin{proof}[\bfseries\upshape \color{blue}Note]\color{Red}}
+	{\end{proof}
+	\renewcommand{\qedsymbol}{\oldqedsymbol}}
+
+
+%%% These are some shortcuts that are handy
+\def\real{{\mathbb R}}
+\def\Natural{\mathbb{N}}
+\def\dx{\textnormal{dx}}
+\def\dy{\textnormal{dy}}
+\def\dz{\textnormal{dz}}
+\def\dt{\textnormal{dt}}
+\def\ds{\textnormal{ds}}
+\def\dw{\textnormal{dw}}
+\def\Re{\textnormal{Re}}
+\def\Im{\textnormal{Im}}
+\def\exp{\textnormal{exp}}
+\def\interior{\textnormal{interior}}
+\def\al{\alpha}
+\def\del{\delta}
+\def\Del{\Delta}
+\def\gam{\gamma}
+\def\Gam{\Gamma}
+\def\Om{\Omega}
+\def\ep{\varepsilon}
+\def\lam{\lambda}
+\def\rational{{\mathbb Q}}
+\def\integer{{\mathbb Z}}
+\def\Q{{\mathbb Q}}
+\def\Z{{\mathbb Z}}
+\def\N{{\mathbb N}}
+\def\R{{\mathbb R}}
+\def\grad{\nabla}
+\def\C{\mathcal C}
+\def\P{\mathcal P}
+\def\T{\mathcal T}
+\def\I{\mathcal I}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\inner}[1]{\langle #1 \rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\spanvect}{\textnormal{span}}
+\newcommand{\union}{\cup}
+\newcommand{\Union}{\bigcup}
+\def\intersect{\cap}
+\def\Intersect{\bigcap}
+
+\DeclareMathOperator*{\Limsup}{LIMSUP}
+
+
+\title{Messing around with Relativity}
+\author{Antonius Torode}
+
+
+%%% Document Starts now
+\begin{document}
+
+\maketitle
+
+\section{Time Dilation and Length Contraction}
+To begin, we start with Einsteins postulates which are given as
+\begin{enumerate}
+	\item The laws of physics must always hold in all inertial reference frames.
+	\item The speed of light in a vacuum c is the same in all reference frames.
+\end{enumerate}
+From this, we can explore the implications and effects of these assumptions. First, consider a frame of reference $\mathcal{F}$. Suppose we set up two mirrors in this frame that are facing eachother and have a beam of light traveling back and forth between them. Let these mirrors be aligned such that the beam of light is traveling vertically and assume we are in a vacuum. If we set $t=0$ as the point when the light beam hits the bottom mirror, then the time it takes for the light to travel to the top mirror can be determined simply by the distance formula \begin{align}
+v=\frac{\Delta x}{\Delta t} \implies \Delta t = \frac{\Delta x}{v}. \label{v=d/t}
+\end{align} 
+Since we are in a vacuum, the speed of our light is simply $c$ and thus we have $\Delta t = \frac{\Delta x}{c}$. 
+
+Now consider an inertial frame $\mathcal{F}'$ such that the first frame is moving horizontally relative to it. The light will remain traveling between these two mirrors, only the observer in frame $\mathcal{F}'$ will see the light traveling both horizontally and vertically (since $\mathcal{F}$ is moving horizontally as seen in $\mathcal{F}'$). Say the speed that $\mathcal{F}$ is moving as seen from $\mathcal{F}'$ is $v'$. Assuming no acceleration, since light must travel at a constant speed in our vacuum, the distance the light travels from the bottom mirror to the top mirror as observed in $\mathcal{F}'$ is longer than that of $\mathcal{F}$. The vertical distance between the two plates is still $\Delta x$, but now there is also a horizontal distance. Suppose it takes $\Delta t'$ for the light to hit the top mirror in $\mathcal{F}'$, then the horizontal distance that the light traveled is given by $\Delta x_h = v' \Delta t'$ and so the total distance the light traveled in $\mathcal{F}'$ is 
+\begin{align}
+\Delta x' =\sqrt{(\Delta x)^2 + (\Delta x_h)^2}=\sqrt{(\Delta x)^2 + (v' \Delta t')^2}. \label{a^2=b^2+c^2}
+\end{align}
+Now, by definition, $\Delta x' = c \Delta t'$ and so if we combine this with (\ref{v=d/t}) and (\ref{a^2=b^2+c^2}) we have the equation for time dilation which is
+\begin{align}
+(c \Delta t')^2=(c \Delta t)^2 + (v' \Delta t')^2 \implies \Delta t'=\frac{\Delta t}{\sqrt{1-\left(\frac{v'}{c}\right)^2}} \label{time dilation}.
+\end{align}
+
+Now, we can take (\ref{v=d/t}) and use it to relate $\Delta x$ and $\Delta x'$. First, notice that $\Delta x = c \Delta t$ and $\Delta x' = c \Delta t'$. Solving for $c$ and setting these equal to each other gives $\frac{\Delta x}{\Delta t} = \frac{\Delta x'}{\Delta t'} \implies \frac{\Delta x}{\Delta x'} = \frac{\Delta t'}{\Delta t}$. Combining this with (\ref{time dilation}) will then give us the relationship for length contraction between reference frames which is
+\begin{align}
+\frac{\Delta x}{\Delta x'} = \frac{\Delta t'}{\Delta t} \implies \Delta x' = \Delta x \sqrt{1-\left(\frac{v'}{c}\right)^2}. \label{lengthContraction}
+\end{align}
+The factor of $\sqrt{1-\left(\frac{v'}{c}\right)^2}$ appears often within relativity and is generally denoted $\gamma^{-1}$. Therefore these equations can also be written as $\Delta t'=\gamma \Delta t$ and $\Delta x'=\frac{ \Delta x}{\gamma}$. 
+
+\begin{Deleted}
+By definition, a velocity is determined by the change in distance over the change in time, or $v=\frac{\Delta x}{\Delta t}$. We can thus take the length contraction and time dilation formula's and divide them to get a relationship between the reference velocities.
+\begin{align}
+\frac{\Delta x'}{\Delta t'} = \frac{1}{\gamma^2}\frac{\Delta x}{\Delta t} \implies v' = \frac{v}{\gamma^2}.
+\end{align}
+Simplifying this gives
+\begin{align}
+c^2v'-v'^3 = vc^2
+\end{align}
+\end{Deleted}
+
+
+	
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
