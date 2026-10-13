@@ -4,6 +4,7 @@ This file simply tracks acronyms I've used for various things.
 
 ## Used Acronyms
 
+- Antonius’ General Purpose License (AGPL)
 - Change-log Automation & Release Assistant (CARA)
 - Generations of Nuclear Activity (GINA)
 - Git Repository Indexing and Digital Documentation Linking Engine (GRIDDLE)
