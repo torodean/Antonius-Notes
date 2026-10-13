@@ -18,6 +18,7 @@ This file simply tracks acronyms I've used for various things.
 - Receiver Operations Sufficiently Evaluated (ROSE)
 - Station Adder Multitool (SAM)
 - SAM Modification and Integration Extension (SAMMIE)
+- Sequenced Action Replay Agent (SARA)
 - Terrarium Environmental System with Smart Automation (TESSA)
 - Trading Rewarded over Unfair Economics (TRUE)
 - TRUE Trading Card Game (TTCG)
