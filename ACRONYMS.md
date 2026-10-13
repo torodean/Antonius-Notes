@@ -18,5 +18,5 @@ This file simply tracks acronyms I've used for various things.
 - Station Adder Multitool (SAM)
 - SAM Modification and Integration Extension (SAMMIE)
 - Terrarium Environmental System with Smart Automation (TESSA)
-- Tactical Reasoning over Unfair Economics (TRUE)
+- Trading Rewarded over Unfair Economics (TRUE)
 - TRUE Trading Card Game (TTCG)
